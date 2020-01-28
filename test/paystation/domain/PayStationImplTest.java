@@ -9,7 +9,10 @@
  * implied. You may study, use, modify, and distribute it for non-commercial
  * purposes. For any commercial use, see http://www.baerbak.com/
  */
+
+//testing commit 
 package paystation.domain;
+
 
 import java.util.*;
 import org.junit.After;
