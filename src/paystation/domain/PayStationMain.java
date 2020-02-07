@@ -6,6 +6,7 @@
 package paystation.domain;
 
 import java.util.Scanner;
+import java.util.Map;
 
 /**
  *
@@ -16,8 +17,9 @@ public class PayStationMain {
     /**
      *
      * @param args
+     * @throws paystation.domain.IllegalCoinException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalCoinException {
         Scanner scan = new Scanner(System.in);
         PayStationImpl ps = new PayStationImpl();
 
@@ -29,8 +31,17 @@ public class PayStationMain {
             switch (option) {
                 case 1:
                     //Deposit coins
-                    System.out.println("\nYou selected: 'Deposit Coins'");
+                    while (true) {
+                        System.out.println("\nInsert a coin or press '0' to finish. Only nickels, dimes, and quarters are accepted. ");
+                        int coinValue = scan.nextInt();
+                        if (coinValue != 0) {
+                            ps.addPayment(coinValue);
+                        } else {
+                            break;
+                        }
+                    }
                     break;
+                  
                 case 2:
                     //Display time
                     System.out.println("\nYou selected: 'Display'");
