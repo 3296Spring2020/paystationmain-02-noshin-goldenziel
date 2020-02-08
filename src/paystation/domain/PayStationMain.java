@@ -52,7 +52,7 @@ public class PayStationMain {
                     break;
                 case 4:
                  
-                    //Cancel
+                    //Cancel 
                     if (ps.readDisplay() > 0) {
                         System.out.println("\nPress '1' to confirm your cancellation. ");
                         option = scan.nextInt();
