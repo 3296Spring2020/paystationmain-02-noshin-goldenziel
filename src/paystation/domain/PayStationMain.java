@@ -61,8 +61,40 @@ public class PayStationMain {
                     }
                     break;
                 case 4:
-                    //Cancel
-                    System.out.println("\nYou selected: 'Cancel'");
+                    //Cancel 
+                    if (ps.readDisplay() > 0) {
+                        System.out.println("\nPress '1' to confirm your cancellation. ");
+                        option = scan.nextInt();
+
+                        if (option == 1) {
+                            Map coinMap = ps.cancel();
+                            int sum = 0;
+                           
+                            if(coinMap.containsKey(1)) {
+                                sum += 5 * (int)coinMap.get(1);
+                            }
+                            if(coinMap.containsKey(2)) {
+                                sum += 10 * (int)coinMap.get(2);
+                            }
+                            if(coinMap.containsKey(3)) {
+                                sum += 25 * (int)coinMap.get(3);
+                            }
+
+                            System.out.println("\nPurchase cancelled. Returning " + sum + "¢\n");
+                           
+                            if(coinMap.containsKey(1)) {
+                                System.out.println(coinMap.get(1) + " nickel(s)");
+                            }
+                            if(coinMap.containsKey(2)) {
+                                System.out.println(coinMap.get(2) + " dime(s)");
+                            }
+                            if(coinMap.containsKey(3)) {
+                                System.out.println(coinMap.get(3) + " quarter(s)");
+                            }
+                        }
+                    } else {
+                        System.out.println("\nYou have not purchased any parking time. There is nothing to cancel.");
+                    }
                     break;
                 case 5:
                     //Change Rate Strategy
