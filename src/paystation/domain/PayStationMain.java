@@ -41,14 +41,24 @@ public class PayStationMain {
                         }
                     }
                     break;
-                  
                 case 2:
                     //Display time
-                    System.out.println("\nYou selected: 'Display'");
+                    System.out.println("\n" + ps.readDisplay() + " minute(s)");
                     break;
                 case 3:
                     //Buy ticket
-                    System.out.println("\nYou selected: 'Buy Ticket'");
+                    if (ps.readDisplay() > 0) {
+                        System.out.println("\nYou are purchasing " + ps.readDisplay() + " minute(s) of parking time. Press '1' to confirm your purchase. ");
+                        option = scan.nextInt();
+
+                        if (option == 1) {
+                            System.out.println("\nPrinting receipt...");
+                            Receipt r = ps.buy();
+                            System.out.println("\nThis receipt is good for " + r.value() + " minute(s)");
+                        }
+                    } else {
+                        System.out.println("\nYou have not purchased any parking time. Please make a deposit and try again.");
+                    }
                     break;
                 case 4:
                  
