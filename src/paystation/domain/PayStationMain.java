@@ -69,26 +69,26 @@ public class PayStationMain {
                         if (option == 1) {
                             Map coinMap = ps.cancel();
                             int sum = 0;
-                           
-                            if(coinMap.containsKey(1)) {
-                                sum += 5 * (int)coinMap.get(1);
+
+                            if (coinMap.containsKey(1)) {
+                                sum += 5 * (int) coinMap.get(1);
                             }
-                            if(coinMap.containsKey(2)) {
-                                sum += 10 * (int)coinMap.get(2);
+                            if (coinMap.containsKey(2)) {
+                                sum += 10 * (int) coinMap.get(2);
                             }
-                            if(coinMap.containsKey(3)) {
-                                sum += 25 * (int)coinMap.get(3);
+                            if (coinMap.containsKey(3)) {
+                                sum += 25 * (int) coinMap.get(3);
                             }
 
                             System.out.println("\nPurchase cancelled. Returning " + sum + "¢\n");
-                           
-                            if(coinMap.containsKey(1)) {
+
+                            if (coinMap.containsKey(1)) {
                                 System.out.println(coinMap.get(1) + " nickel(s)");
                             }
-                            if(coinMap.containsKey(2)) {
+                            if (coinMap.containsKey(2)) {
                                 System.out.println(coinMap.get(2) + " dime(s)");
                             }
-                            if(coinMap.containsKey(3)) {
+                            if (coinMap.containsKey(3)) {
                                 System.out.println(coinMap.get(3) + " quarter(s)");
                             }
                         }
@@ -98,12 +98,30 @@ public class PayStationMain {
                     break;
                 case 5:
                     //Change Rate Strategy
-                    System.out.println("\nYou selected: 'Change Rate Strategy'");
+                    if (ps.readDisplay() == 0) {
+                        System.out.println("\nSelect a rate strategy:\n1. Linear Rate\n2. Progressive Rate\n3. Alternating Rate");
+                        option = scan.nextInt();
+                        if (option > 0 && option < 4) {
+                            ps.changeRate(option);
+                            if (option == 1) {
+                                System.out.println("\nYou successfully changed to Linear Rate");
+                            } else if (option == 2) {
+                                System.out.println("\nYou successfully changed to Progressive Rate");
+                            } else if (option == 3) {
+                                System.out.println("\nYou successfully changed to Alternating Rate");
+                            }
+                        } else {
+                            System.out.println("\nNot a valid option");
+                        }
+                    } else {
+                        System.out.println("\nYou are currently in the middle of a purchase. Please complete or cancel your purchase before changing the rate.");
+                    }
+
                     break;
                 default:
                     System.out.println("\nNot a valid option.");
+
             }
         }
-
     }
 }
