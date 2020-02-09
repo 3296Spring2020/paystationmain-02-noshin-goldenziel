@@ -1,5 +1,6 @@
 package paystation.domain;
 import java.util.*;
+import java.time.DayOfWeek;
 
 /**
  * Implementation of the pay station.
@@ -29,7 +30,7 @@ public class PayStationImpl implements PayStation {
     private boolean dimeBool = false;
     private boolean quarterBool = false;
     
-    private RateStrategy rs = new LinearRate();
+    private RateStrategy rs = new LinearRate(); // Rate Strategy defaults to linear rate
     
     @Override
     public void addPayment(int coinValue)
@@ -74,7 +75,7 @@ public class PayStationImpl implements PayStation {
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         insertedSoFar += coinValue;
-        timeBought = rs.calculateTime(insertedSoFar);
+        timeBought = rs.calculateTime(insertedSoFar); // Time calculated depends on rate strategy
     }
 
     @Override
@@ -114,6 +115,7 @@ public class PayStationImpl implements PayStation {
         return total;
     }
     
+    // Changes rate strategy depending on user input in main class
     public void changeRate(int option)
     {
         switch(option) {
@@ -122,6 +124,9 @@ public class PayStationImpl implements PayStation {
                 break;
             case 2:
                 rs = new ProgressiveRate();
+                break;
+            case 3:
+                rs = new AlternatingRate();
                 break;
             default:
                 
