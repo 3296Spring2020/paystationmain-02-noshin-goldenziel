@@ -29,6 +29,8 @@ public class PayStationImpl implements PayStation {
     private boolean dimeBool = false;
     private boolean quarterBool = false;
     
+    private RateStrategy rs = new LinearRate();
+    
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
@@ -72,7 +74,7 @@ public class PayStationImpl implements PayStation {
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         insertedSoFar += coinValue;
-        timeBought = insertedSoFar / 5 * 2;
+        timeBought = rs.calculateTime(insertedSoFar);
     }
 
     @Override
@@ -110,5 +112,19 @@ public class PayStationImpl implements PayStation {
         int total = insertedSoFar;
         insertedSoFar = 0;
         return total;
+    }
+    
+    public void changeRate(int option)
+    {
+        switch(option) {
+            case 1:
+                rs = new LinearRate();
+                break;
+            case 2:
+                rs = new ProgressiveRate();
+                break;
+            default:
+                
+        }
     }
 }
