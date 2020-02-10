@@ -25,12 +25,12 @@ How was the collaboration? What was done by each team member? Did one person was
 
 ## Testing: 
 What level of testing are you doing? (unit testing, component testing or system testing)?
-- We used system testing for our project. Each time we had something to test, we ran the PayStationMain file and manually checked if the program's output matched our expectations.
+- We used system testing for our project. Each time we had something to test, we ran the PayStationMain file and manually checked if the program's output matched our expectations. After we finished our project, we went back and tested all the important features and put our results in Tests.md in this repository.
 Are all tests automated or are you doing some manual tests? Did you need to change part of the program to be able to automate testing?
 - Testing was entirely manual, as stated above.
 Did you discover problems or bugs while doing testing?
 - We spent a lot of time debating how the program would run if the day of the week changed in the middle of a deposit. We ultimately decided that a purchase would follow whatever rate strategy was in use the day its last coin was deposited. There were no serious bugs outside of a few syntax errors.
 Did the same person wrote the test and the associated code?
-- We each tested every part of our code multiple times. Nearly all of our time working on this project was spent together, so we both were able to look over how our code ran and check for inconsistencies.
+- We each tested every part of our code multiple times. Nearly all of our time working on this project was spent together, so we both were able to look over how our code ran and check for inconsistencies. All of the uploaded tests were performed and screenshotted on Sarah's machine.
 Which test were written before the code or after the code?
 - We didn't write any automated tests, so all testing was done during or after code development.
