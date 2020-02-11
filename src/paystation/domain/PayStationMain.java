@@ -10,7 +10,7 @@ public class PayStationMain {
      * @throws paystation.domain.IllegalCoinException
      */
     public static void main(String[] args) throws IllegalCoinException {
-        String Pass= "password";
+        String pass = "password"; // Password used for securing the Change Rate Strategy option
 
         Scanner scan = new Scanner(System.in);
         PayStationImpl ps = new PayStationImpl();
@@ -24,7 +24,7 @@ public class PayStationMain {
             //each method corresponds to the option number, if the options isn't 1-5 then it does not do anything
             switch (option) {
                 case 1:
-                    //Deposit coins
+                    //Deposit Coins
                     while (true) {
                         // Program throws IllegalCoinException when a coin other than 5, 10, or 25 is entered
                         System.out.println("\nInsert a coin or press '0' to finish. Only nickels, dimes, and quarters are accepted. ");
@@ -37,11 +37,11 @@ public class PayStationMain {
                     }
                     break;
                 case 2:
-                    //Display time
+                    //Display Time
                     System.out.println("\n" + ps.readDisplay() + " minute(s)");
                     break;
                 case 3:
-                    //Buy ticket
+                    //Buy Ticket
                     if (ps.readDisplay() > 0) {
                         System.out.println("\nYou are purchasing " + ps.readDisplay() + " minute(s) of parking time. Press '1' to confirm your purchase. ");
                         option = scan.nextInt();
@@ -93,17 +93,17 @@ public class PayStationMain {
                     break;
                 case 5:
                     //Change Rate Strategy
-                    System.out.print("\nEnter your password: ");
+                    System.out.println("\nEnter your password: (For this lab, just \"" + pass + "\")"); // Password Protection
                     int attempts = 3;
                     boolean correctPass = true;
-                    while(attempts != 0){
+                    while(attempts != 0) {
                        attempts--;
-                       String pass= scan.next();
-                       if(!pass.equals(Pass)){
-                           if(attempts > 0)
-                                System.out.println("Wrong password entered, " + String.valueOf(attempts) + " tries left");
-                           else {
-                               System.out.append("Too many failed attempts");
+                       String userPass= scan.next();
+                       if(!userPass.equals(pass)) {
+                           if(attempts > 0) {
+                                System.out.println("\nWrong password entered. " + String.valueOf(attempts) + " tries left");
+                           } else {
+                               System.out.println("\nToo many failed attempts");
                                correctPass = false;
                            }
                        } else {
@@ -115,9 +115,7 @@ public class PayStationMain {
                         break;
                     }
                     
-                   
-                    
-                    if (ps.readDisplay() == 0) {
+                    if (ps.readDisplay() == 0) { // Rate strategy menu
                         System.out.println("\nSelect a rate strategy:\n1. Linear Rate\n2. Progressive Rate\n3. Alternating Rate");
                         option = scan.nextInt();
                         if (option > 0 && option < 4) { // option is 1, 2, or 3
@@ -133,14 +131,13 @@ public class PayStationMain {
                             System.out.println("\nNot a valid option");
                         }
                     } else { // Don't allow rate strategy to change while there is money in the machine
-                        System.out.println("\nYou are currently in the middle of a purchase. Please complete or cancel your purchase before changing the rate.");
+                        System.out.println("\nThis machine is currently in the middle of a purchase. Please complete or cancel the purchase before changing the rate.");
                     }
 
                     break;
                 default:
                     // option is not between 1-5
                     System.out.println("\nNot a valid option.");
-
             }
         }
     }
