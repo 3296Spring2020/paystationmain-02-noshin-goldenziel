@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package paystation.domain;
 
 import java.util.Scanner;
 import java.util.Map;
 
-/**
- *
- * @author tuh00941
- */
 public class PayStationMain {
-
     /**
      *
      * @param args
      * @throws paystation.domain.IllegalCoinException
      */
     public static void main(String[] args) throws IllegalCoinException {
+        String Pass= "password";
+
         Scanner scan = new Scanner(System.in);
         PayStationImpl ps = new PayStationImpl();
+        
 
         System.out.println("Welcome to PayStation!");
         while (true) {
@@ -100,6 +93,30 @@ public class PayStationMain {
                     break;
                 case 5:
                     //Change Rate Strategy
+                    System.out.print("\nEnter your password: ");
+                    int attempts = 3;
+                    boolean correctPass = true;
+                    while(attempts != 0){
+                       attempts--;
+                       String pass= scan.next();
+                       if(!pass.equals(Pass)){
+                           if(attempts > 0)
+                                System.out.println("Wrong password entered, " + String.valueOf(attempts) + " tries left");
+                           else {
+                               System.out.append("Too many failed attempts");
+                               correctPass = false;
+                           }
+                       } else {
+                           break;
+                       }
+                        
+                    }
+                    if(!correctPass){
+                        break;
+                    }
+                    
+                   
+                    
                     if (ps.readDisplay() == 0) {
                         System.out.println("\nSelect a rate strategy:\n1. Linear Rate\n2. Progressive Rate\n3. Alternating Rate");
                         option = scan.nextInt();
